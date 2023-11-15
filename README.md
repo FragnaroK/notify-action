@@ -55,26 +55,22 @@ jobs:
       - name: Checkout repository       
         uses: actions/checkout@v4      
       - name: Notify IFTTT       
-        uses: <your-github-username>/<your-repo-name>@<release-tag>   
+        uses: fragnarok/notify-action@v2
         with:         
           type: 'error'         
-          repoName: ${{ github.repository }}         
-          branch: ${{ github.ref }}         
+          repoName: 'exampleRepo'         
+          branch: 'main'         
           details: 'Workflow failed!'         
-          repoLink: ${{ github.event.repository.html_url }}         
+          repoLink: 'https://github.com/user/repo'        
           IFTTT_KEY: ${{ secrets.IFTTT_KEY }}
 ```
-
-
-<!--         data: '{"repoName": "${{ inputs.repoName }} - ${{ inputs.branch }}","status": "${{ inputs.type }}","details": "${{ inputs.details }}","repoLink": "${{ inputs.repoLink }}"}'
- -->
 
 The Object sent to IFTTT will look like this:
 
 ```json
 {
   "status": "error",
-  "repoName": "YourRepoName - main",
+  "repoName": "YourRepoName",
   "repoBranch": "main",
   "repoLink": "https://github.com/<your-username>/<repo-name>",
   "details": "Workflow failed!",
